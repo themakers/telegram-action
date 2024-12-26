@@ -16,13 +16,16 @@ func main() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	var botTokenFlag = flag.String("bot-token", "", "")
+	var (
+		botTokenFlag = flag.String("bot-token", "", "")
+		chatIDFlag   = flag.String("chat-id", "", "")
+	)
 	flag.Parse()
 
-	log.Println("environment:", *botTokenFlag, actions.DumpEnv())
+	log.Println("environment:", *botTokenFlag, *chatIDFlag, actions.DumpEnv())
 
 	action.Invoke(ctx, action.Options{
 		BotToken: *botTokenFlag,
-		ChatID:   actions.Input("chat_id"),
+		ChatID:   *chatIDFlag,
 	})
 }
