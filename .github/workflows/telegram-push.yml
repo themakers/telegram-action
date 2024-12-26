@@ -23,24 +23,3 @@ jobs:
           check-latest: true
           cache-dependency-path: "**/*.sum"
       - run: go run actions/telegram-push/main.go --bot-token=${{ secrets.bot_token }}
-
-
-
-
-
-
-
-
-
-#      - name: Send Telegram Notification
-#        run: |
-#          set -e
-#          curl -X POST "https://api.telegram.org/bot${{ secrets.bot_token }}/sendMessage" \
-#            -H "Content-Type: application/json" \
-#            -d @- <<EOF
-#              {
-#                "chat_id": "${{ inputs.chat_id }}",
-#                "text": "New push to the repository: \`${{ github.repository }}\` on branch \`${{ github.ref_name }}\`.\\nCommit: \`${{ github.sha }}\` by \`${{ github.actor }}\`.",
-#                "parse_mode": "Markdown"
-#              }
-#            EOF
