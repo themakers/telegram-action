@@ -3,6 +3,7 @@ package action
 import (
 	"context"
 	"os"
+	"strings"
 )
 
 type Options struct {
@@ -15,8 +16,9 @@ type Options struct {
 func Invoke(ctx context.Context, opt Options) {
 
 	notify(ctx, notifyOptions{
-		BotToken: opt.BotToken,
-		ChatID:   opt.ChatID,
+		BotToken:        opt.BotToken,
+		ChatID:          opt.ChatID,
+		MessageTemplate: strings.Trim(os.Getenv("MESSAGE_TEMPLATE"), " \n\r\t"),
 
 		Repository: os.Getenv("GITHUB_REPOSITORY"),
 		Actor:      os.Getenv("GITHUB_ACTOR"),

@@ -7,6 +7,10 @@ on:
         description: "Telegram chat ID"
         required: true
         type: string
+      template:
+        description: "Message template markdown"
+        required: true
+        type: string
     secrets:
       bot_token:
         description: "Telegram bot token"
@@ -27,6 +31,8 @@ jobs:
           cache-dependency-path: "**/*.sum"
       - run: go run actions/telegram-push/main.go --bot-token=${{ secrets.bot_token }} --chat-id=${{ inputs.chat_id }}
         env:
+          MESSAGE_TEMPLATE: ${{ inputs.template }}
+
           INPUTS_CONTEXT_JSON:   ${{ toJSON(inputs) }}
           GITHUB_CONTEXT_JSON:   ${{ toJSON(github) }}
           JOB_CONTEXT_JSON:      ${{ toJSON(job) }}

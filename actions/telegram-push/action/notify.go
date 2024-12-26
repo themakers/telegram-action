@@ -19,6 +19,8 @@ type notifyOptions struct {
 	BotToken string
 	ChatID   string
 
+	MessageTemplate string
+
 	Repository string
 	Branch     string
 	CommitSHA  string
@@ -28,7 +30,11 @@ type notifyOptions struct {
 func notify(ctx context.Context, opt notifyOptions) {
 	var messageBuffer bytes.Buffer
 
-	if tmpl, err := template.New("message").Parse(template_push_md); err != nil {
+	if opt.MessageTemplate == "" {
+		opt.MessageTemplate = template_push_md
+	}
+
+	if tmpl, err := template.New("message").Parse(opt.MessageTemplate); err != nil {
 		panic(err)
 	} else if err := tmpl.Execute(&messageBuffer, opt); err != nil {
 		panic(err)
