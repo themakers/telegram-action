@@ -27,4 +27,10 @@ jobs:
           cache-dependency-path: "**/*.sum"
       - run: go run actions/telegram-push/main.go --bot-token=${{ secrets.bot_token }} --chat-id=${{ inputs.chat_id }}
         env:
-          INPUTS_CONTEXT: ${{ toJSON(inputs) }}
+          INPUTS_CONTEXT_JSON:   ${{ toJSON(inputs) }}
+          GITHUB_CONTEXT_JSON:   ${{ toJSON(github) }}
+          JOB_CONTEXT_JSON:      ${{ toJSON(job) }}
+          STEPS_CONTEXT_JSON:    ${{ toJSON(steps) }}
+          RUNNER_CONTEXT_JSON:   ${{ toJSON(runner) }}
+          STRATEGY_CONTEXT_JSON: ${{ toJSON(strategy) }}
+          MATRIX_CONTEXT_JSON:   ${{ toJSON(matrix) }}

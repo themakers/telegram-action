@@ -1,5 +1,8 @@
 # telegram-action
 
+* TODO: Optimize using binary release?
+* https://api.github.com/repos/themakers/telegram-action/releases/latest
+
 ```yaml
 ---
 name: My action
@@ -18,4 +21,7 @@ runs:
 steps:
 - name: My action
   uses: docker://themakers/telegram-action:latest
+
+
+
 ```
