@@ -1,0 +1,14 @@
+name: Trigger Telegram Notification
+
+on:
+  push:
+    branches:
+      - '**'  # Trigger on any push, to all branches
+
+jobs:
+  notify:
+    uses: themakers/telegram-action/.github/workflows/telegram-push.yml@master
+    with:
+      chat_id: ${{ vars.TELEGRAM_NOTIFICATIONS_GROUP_ID }} # Setup this in your repo or org setting
+    secrets:
+      bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }} # Setup this in your repo or org setting
