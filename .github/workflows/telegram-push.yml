@@ -26,3 +26,5 @@ jobs:
           check-latest: true
           cache-dependency-path: "**/*.sum"
       - run: go run actions/telegram-push/main.go --bot-token=${{ secrets.bot_token }}
+        env:
+          INPUTS_CONTEXT: ${{ toJSON(inputs) }}
